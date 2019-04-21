@@ -1,0 +1,62 @@
+package ${package.Controller};
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.example.mybatisplus.utils.JsonUtils;
+#if(${restControllerStyle})
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+	@Autowired
+    ${table.serviceName} servie;
+
+    @GetMapping("/{id}")
+    public Response<${entity}> get(@PathVariable Integer id){
+        ${entity} model = service.getById(id)};
+        return ResponseUtils.getSuccessJson(token);
+    }
+    @PostMapping
+    public Response<Integer> save(@RequestBody ${entity} model){
+        service.save(model);
+        return ResponseUtils.getSuccessJson(model.getId());
+    }
+    @DeleteMapping("/{id}")
+    public Response<Boolean> delete(@PathVariable Integer id){
+        service.removeById(id);
+        return ResponseUtils.getSuccessJson(true);
+    }
+    @PutMapping("/{id}")
+    public Response<Boolean> update(@PathVariable Integer id,@RequestBody ${entity} model){
+        model.setId(id);
+        service.updateById(model);
+        return ResponseUtils.getSuccessJson(true);
+    }
+    @PostMapping("/list")
+    public Response<IPage> find(@RequestBody(required = false) ModelQo modelQo){
+        service.find(modelQo);
+    }
+}
