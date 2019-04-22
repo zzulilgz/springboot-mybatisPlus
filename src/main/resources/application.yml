@@ -7,9 +7,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yhuk_power?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8
+    url: jdbc:mysql://123.207.255.184:3306/yhuk_power?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8
     username: root
-    password: 123456
+    password: aca1b7dd6d4ed58e320288fbb343240b
     # 初始化大小，最小，最大
     initialSize: 5
     minIdle: 5

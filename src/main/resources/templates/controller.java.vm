@@ -1,9 +1,17 @@
 package ${package.Controller};
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import ${package.Entity}.${entity};
+import ${package.Service}.${table.serviceName};
+import com.example.mybatisplus.utils.JsonUtils;
+import com.example.mybatisplus.utils.ResponseUtils;
+import com.example.mybatisplus.utils.ResponseUtils.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.mybatisplus.utils.JsonUtils;
+import com.example.mybatisplus.Qo.ListByPageQo;
 #if(${restControllerStyle})
 #else
 import org.springframework.stereotype.Controller;
@@ -31,13 +39,15 @@ public class ${table.controllerName} extends ${superControllerClass} {
 #else
 public class ${table.controllerName} {
 #end
+    private static Logger logger = LoggerFactory.getLogger("web");
+
 	@Autowired
-    ${table.serviceName} servie;
+    ${table.serviceName} service;
 
     @GetMapping("/{id}")
     public Response<${entity}> get(@PathVariable Integer id){
-        ${entity} model = service.getById(id)};
-        return ResponseUtils.getSuccessJson(token);
+        ${entity} model = service.getById(id);
+        return ResponseUtils.getSuccessJson(model);
     }
     @PostMapping
     public Response<Integer> save(@RequestBody ${entity} model){
@@ -56,7 +66,8 @@ public class ${table.controllerName} {
         return ResponseUtils.getSuccessJson(true);
     }
     @PostMapping("/list")
-    public Response<IPage> find(@RequestBody(required = false) ModelQo modelQo){
-        service.find(modelQo);
+    public Response<IPage> find(@RequestBody(required = false) ListByPageQo reqQo){
+        logger.info("/list request:{}",JsonUtils.toJson(reqQo));
+        return ResponseUtils.getSuccessJson(service.find(reqQo));
     }
 }

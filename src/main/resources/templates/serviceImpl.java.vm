@@ -4,7 +4,14 @@ import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.example.mybatisplus.Qo.ListByPageQo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 /**
  * <p>
@@ -17,8 +24,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
-    @Override
-    private List<${entity}> find(){
+    @Autowired
+    ${table.mapperName} mapper;
 
+    @Override
+    public IPage find(ListByPageQo reqQo){
+        QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>();
+
+        setQueryTimeType(queryWrapper,reqQo,"create_time");
+
+        return mapper.selectPage(initPage(reqQo),queryWrapper);
     }
+
 }

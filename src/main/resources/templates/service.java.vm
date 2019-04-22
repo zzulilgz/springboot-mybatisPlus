@@ -2,7 +2,9 @@ package ${package.Service};
 
 import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
-import com.example.mybatisplus.Qo.ModelQo
+import com.baomidou.mybatisplus.core.metadata.IPage;
+
+import com.example.mybatisplus.Qo.ListByPageQo;
 /**
  * <p>
  * $!{table.comment} 服务类
@@ -13,5 +15,5 @@ import com.example.mybatisplus.Qo.ModelQo
  */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
-    List<${entity}> servive.find(ModelQo);
+    IPage find(ListByPageQo reqQo);
 }

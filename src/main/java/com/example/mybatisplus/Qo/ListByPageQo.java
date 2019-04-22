@@ -5,13 +5,13 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ModelQo {
+public class ListByPageQo {
 
     private Date startTime;
 
     private Date endTime;
 
-    private Integer pageNO=0;
+    private Integer pageNo=0;
 
     private Integer pageSize=10;
 

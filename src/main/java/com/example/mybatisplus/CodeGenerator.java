@@ -15,11 +15,13 @@ public class CodeGenerator {
 
     public static final String OUTPUT_DIR = "\\src\\main\\java";
     public static final String MYSQL_USER_NAME = "root";
-    public static final String MYSQL_PASSWORD = "123456";
-    public static final String MYSQL_LINK_URL = "jdbc:mysql://localhost:3306/yhuk_power?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8";
+    public static final String MYSQL_PASSWORD = "aca1b7dd6d4ed58e320288fbb343240b";
+    public static final String MYSQL_LINK_URL = "jdbc:mysql://123.207.255.184:3306/yhuk_power?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8";
     public static final String BASIC_PACKAGE = "com.example.mybatisplus";
     public static final String[] INCLUDE_TABLES = {"power_user"};  //需要生成的表
 
+    //自定义父类
+    public static final String Super_ServiceImpl_Class = "com.example.mybatisplus.service.impl.BaseServiceImpl";
 
     public static void main(String[] args) {
         AutoGenerator mpg = new AutoGenerator();
@@ -77,7 +79,7 @@ public class CodeGenerator {
         // 自定义 service 父类
         // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
         // 自定义 service 实现类父类
-        // strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
+        strategy.setSuperServiceImplClass(Super_ServiceImpl_Class);
         // 自定义 controller 父类
         //strategy.setSuperControllerClass("cn.jeefast.common.base.BaseController");
         // 生成 RestController 风格
